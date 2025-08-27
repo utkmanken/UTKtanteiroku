@@ -9,7 +9,7 @@
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;tesuto
-[jump target="gamestart"]
+;[jump target="gamestart"]
 ;===============================
 
 
