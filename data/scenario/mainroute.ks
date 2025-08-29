@@ -16,7 +16,7 @@
 [show_skip]
 ;-----------------------------------------------------------------
 ;各QRチェック 終わったら消す
-;[jump storage="scene11.ks" target="*qr11start"]
+[jump storage="scene11.ks" target="*qr11start"]
 ;-----------------------------------------------------------------
 [jump storage="scene1.ks" target="*qr1start" cond="sf.chaptercount == 0"]
 
@@ -107,5 +107,6 @@
 [jump storage="scene12.ks" target="*qr12start" cond="sf.chaptercount == 11"]
 ここに間違ったQRを読み込んだとき用のセリフを入れてください[t3]
 [jump target="*camerapoint"]
+
 
 
