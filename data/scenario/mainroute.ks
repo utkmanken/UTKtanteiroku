@@ -16,7 +16,7 @@
 [show_skip]
 ;-----------------------------------------------------------------
 ;各QRチェック 終わったら消す
-[jump storage="scene11.ks" target="*qr11start"]
+;[jump storage="scene11.ks" target="*qr11start"]
 ;-----------------------------------------------------------------
 [jump storage="scene1.ks" target="*qr1start" cond="sf.chaptercount == 0"]
 
@@ -131,4 +131,5 @@
 [stop_bgcamera wait=false]
 
 [jump target="*camerapoint"]
+
 
