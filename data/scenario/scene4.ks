@@ -417,7 +417,7 @@
 
 白薊って作者名がわかってれば、[t1]振られてる分類番号もわかるはず。[p]
 
-[hide_lends name="frame"]
+[hide_lends name="example"]
 
 [reset1 name="kabura"]
 
@@ -685,5 +685,6 @@
 
 [eval exp="sf.chaptercount = 4"]
 ;QRをみたかのチェック チェックポイントに1を足す
+
 
 [jump storage="mainroute.ks" target="*camerapoint"]
