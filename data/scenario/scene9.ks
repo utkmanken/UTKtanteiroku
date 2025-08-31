@@ -422,7 +422,7 @@
 
 [chara_hide_all time="200" wait="true" layer="2"]
 
-[bg storage="qrbk102_01.png" time="200" wait="false"]
+[bg storage="qrbk101_01.png" time="200" wait="false"]
 
 
 
@@ -491,7 +491,7 @@
 
 [chara_hide_all time="200" wait="tarue" layer="2"]
 
-[bg storage="qrbk102_02.png" time="200" wait="false"]
+[bg storage="qrbk101_02.png" time="200" wait="false"]
 
 
 
@@ -614,5 +614,6 @@
 
 [eval exp="sf.chaptercount = 9"]
 ;QRをみたかのチェック チェックポイントに1を足す
+
 
 [jump storage="mainroute.ks" target="*camerapoint"]
