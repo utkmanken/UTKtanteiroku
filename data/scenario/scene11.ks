@@ -571,7 +571,7 @@
 [wait time="1500"]
 
 
-[free_image layer="0"]
+[freeimage layer="0"]
 [bg storage="qrbk012_02.jpg"]
 
 [show_message]
@@ -729,3 +729,4 @@
 
 
 [jump storage="mainroute.ks" target="*camerapoint"]
+
