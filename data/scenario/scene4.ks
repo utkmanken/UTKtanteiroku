@@ -408,18 +408,11 @@
 
 #kabura:B14
 
-[move1 name="kabura"]
-
-[show_lends storage="example.png" name="exsmple"]
-
 
 図書室とかの本には、[t1]ジャンルと作者の名前を元に三桁の番号とアルファベットが振られてるんだ。[p]
 
 白薊って作者名がわかってれば、[t1]振られてる分類番号もわかるはず。[p]
 
-[hide_lends name="example"]
-
-[reset1 name="kabura"]
 
 
 
@@ -688,3 +681,4 @@
 
 
 [jump storage="mainroute.ks" target="*camerapoint"]
+
