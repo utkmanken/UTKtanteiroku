@@ -571,6 +571,7 @@
 [wait time="1500"]
 
 
+[free_image layer="0"]
 [bg storage="qrbk012_02.jpg"]
 
 [show_message]
@@ -725,5 +726,6 @@
 
 [eval exp="sf.chaptercount = 11 "]
 ;QR1をみたかのチェック チェックポイントに1を足す
+
 
 [jump storage="mainroute.ks" target="*camerapoint"]
