@@ -255,20 +255,11 @@
 
 良かったら、[t1]もう一度聞かせてあげる?[p]
 
-[move1 name="aya"]
 
-[rmove1 name="yuto"]
-
-[show_lends storage="books1.png" name="books"]
 
 #aya:D13
 小型録音機よ。[t2]漫研部室での話は全て録音させてもらったわ。[p]
 
-[hide_lends name="frame"]
-
-[reset1 name="aya"]
-
-[reset1 name="yuto"]
 
 #yuto:rI04
 ⁉︎[p]
@@ -536,5 +527,6 @@
 [bg storage="qrbkend2.jpg" time="4000"]
 
 [bg storage="qrbkend3.jpg" time="10"]
+
 
 
