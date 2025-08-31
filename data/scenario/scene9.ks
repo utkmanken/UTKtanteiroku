@@ -422,7 +422,7 @@
 
 [chara_hide_all time="200" wait="true" layer="2"]
 
-[bg storage="qrbk101_01.png" time="200" wait="false"]
+[bg storage="qrbk101_01.jpg" time="200" wait="false"]
 
 
 
@@ -491,7 +491,7 @@
 
 [chara_hide_all time="200" wait="tarue" layer="2"]
 
-[bg storage="qrbk101_02.png" time="200" wait="false"]
+[bg storage="qrbk101_02.jpg" time="200" wait="false"]
 
 
 
@@ -617,3 +617,4 @@
 
 
 [jump storage="mainroute.ks" target="*camerapoint"]
+
