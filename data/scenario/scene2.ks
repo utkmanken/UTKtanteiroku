@@ -425,12 +425,13 @@
 
 [chara_hide_all time="1000" layer="1"] 
 
-漫研の展示会場に移動しよう
+美術室に移動しよう
 
 [eval exp="sf.chaptercount = 2"]
 ;QRをみたかのチェック チェックポイントに1を足す
 
 [jump storage="mainroute.ks" target="*camerapoint"]
+
 
 
 
