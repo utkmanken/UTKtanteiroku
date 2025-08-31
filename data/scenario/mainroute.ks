@@ -9,7 +9,7 @@
 
 [chara_config pos_mode="false"]
 
-[ptext name="chara_name_area" face="kaisoutai" layer="message0" width="200" color="white" x="40" y="910" size="45" overwhite="true"]
+[ptext name="chara_name_area" face="kaisoutai" layer="message0" width="300" color="white" x="40" y="910" size="45" overwhite="true"]
 
 [chara_config ptext="chara_name_area"]
 
@@ -131,4 +131,5 @@
 [stop_bgcamera wait=false]
 
 [jump target="*camerapoint"]
+
 
