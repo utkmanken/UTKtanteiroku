@@ -1,0 +1,10 @@
+/*ウェブフォントを使用する場合はここに定義を追加して下さい*/
+
+@font-face {
+   font-family:"kaisoutai";
+   src:url("../../data/others/kaisounext.ttf") format("truetype");
+   font-weight:normal;
+   font-style:normal;
+   font-family:"BIZ";
+   src:url("../../data/others/BIZUDGothic-Regular.ttf") format("truetype");
+}
