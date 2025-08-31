@@ -48,7 +48,7 @@
 ;オートスキップのボタン登場
 [macro name="show_skip"]
 
-    [button name="skip_button" role="skip"  graphic="qrbutf01.png" x="120" y="30"]
+   
 
 [endmacro]
 
@@ -325,3 +325,4 @@ img[0].src = "data/fgimage/" + mp.storage;
 
 
 [return]
+
