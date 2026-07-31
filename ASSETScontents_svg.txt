@@ -1,0 +1,13 @@
+material/button/cameraicon.svg|202607112300
+material/button/codeicon.svg|202607112300
+material/button/settingicon.svg|202607112300
+material/other_materials/menu_frame.svg|202606232316
+material/button/play_menu.svg|202607112300
+material/button/small_button.svg|202607112300
+material/frame/menu_frame.svg|2022607112307
+material/frame/name_frame.svg|2022607112307
+material/frame/pen.svg|2022607112307
+material/frame/text_frame.svg|2022607112307
+material/other_materials/menu_frame.svg|202607112316
+material/other_materials/pendant.svg|202607112316
+material/other_materials/text_frame.svg|202607112316

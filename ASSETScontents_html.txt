@@ -1,0 +1,6 @@
+HTML/maindisplay/maindisplay.html|202607112257
+HTML/maindisplay/menu.html|202607112257
+HTML/title/camera.html|202607112257
+HTML/title/maintitle.html|202607112257
+HTML/title/record.html|202607112257
+HTML/title/solvingmode.html|202607112257
