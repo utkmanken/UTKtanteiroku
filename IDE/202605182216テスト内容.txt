@@ -1,0 +1,32 @@
+set i = 100 * 35 / (1 + b)
+↓
+{"type": "Program",
+  "body": [{
+      "type": "Set",
+      "var": "i",
+      "value": {
+        "type": "BinaryOp",
+        "op": "/",
+        "left": {
+          "type": "BinaryOp",
+          "op": "*",
+          "left": {"type": "NumberLiteral", "value": 100},
+          "right": {"type": "NumberLiteral", "value": 35}
+        },
+        "right": {
+          "type": "BinaryOp",
+          "op": "+",
+          "left": {"type": "NumberLiteral", "value": 1},
+          "right": {"type": "VarRef", "name": "b"}
+        }
+      },
+      "doNext": true
+}]}
+↓
+setvar 1 program["set#1"]["left"] 100
+sc_calc 1 program["set#1"]["left"] *= 35
+setvar 1 program["set#1"]["right"] 1
+sc_calc 1 program["set#1"]["right"] += b
+setvar 1 i program["set#1"]["left"]
+sc_calc i /= program["set#1"]["right"]
+clearvar 1 program["set#1"] 2

@@ -1,0 +1,82 @@
+returnについて
+　return [num, data];
+num:
+　0 ボタン待ち
+　1 次に進む
+　2 dataが0-basedの次に実行する行番号
+　10 sc_varを保存してボタン待ち
+　11 sc_varを保存して次に進む
+関数一覧:
+　sc_if:
+　　第一引数 条件式 変数、[true/false]、数値、==,!=,>=,<=,>,<を利用可能
+　　第二引数 条件式がtrueのときに実行する行番号(1-based)
+　　第三引数 条件式がfalseのときに実行する行番号(1-based)
+　　return [2, result ? trueLine : falseLine]
+　jumpto:
+　　第一引数 次に実行する行番号(1-based)
+　　return [2, Number(args[0]) - 1]
+　setvar:
+　　第一引数 do_nextフラグ[0/1]
+　　第二引数 設定する変数名(変数名、配列内アクセス、辞書内アクセス)
+　　第三引数 代入する値("文字列"、数値、配列[]、辞書{}、変数名、配列内アクセス、辞書内アクセス)
+　　return [11, null] / [10, null];
+　sc_calc:
+　　第一引数 do_nextフラグ[0/1]
+　　第二引数 計算に使う変数(変数名、配列内アクセス、辞書内アクセス)
+　　第三引数 演算子(+,-,*,/,%,^)
+　　第四引数 計算に使う変数または値など(変数名、配列内アクセス、辞書内アクセス、"文字列(+=のみ)"、数値)
+　　return [11, null] / [10, null]
+　dialogue:
+　　注意: テスト用関数。disp_textへ統合
+　　第一引数 内容
+　　第二引数 nomal/html
+　　第三引数 内部キャラ名
+　　第四引数 表示キャラ名
+　　第五引数 補助オプション
+　　return [0, null]
+　debug_dispvar: //パス 今ある内容を消すかどうか do_next
+　　注意: テスト用関数。disp_textへ統合
+　　第一引数 表示変数のパス
+　　第二引数 表示中の内容を消す[0/1]
+　　第三引数 do_nextフラグ[0/1]
+　　return [1, null] / [0, null]
+　dispIMG:
+　　いずれ実装。画像を表示する関数
+　stateIMG:
+　　いずれ実装。画像の状態を変更する関数
+　sympleBGchange:
+　　注意: テスト用関数。dispIMGへ統合
+　　第一引数 画像パス(ASSETS.img内)
+　　第二引数 画像を表示するか[0/1]
+　　第三引数 画像を消すか[0/1]
+　　第四引数 do_nextフラグ[0/1]
+　　return [1, null] / [0, null]
+　console_dispvar:
+　　注意: テスト用関数。disp_textへ統合
+　　第一引数 変数パス
+　　第二引数 do_nextフラグ[0/1]
+　　return [1, null] / [0, null]
+　clear_scline_counter:
+　　引数なし
+　　return [1, null]
+　disp_text:　//未完成
+　　第一引数 do_nextフラグ
+　　第二引数 表示場所[dialogue/console/その他は表示場所のid]
+　　第三引数 表示内容(${sc_varの中のパス}でその変数内のデータを文字列に変換したもの、エスケープされてない<は次の>までをhtml要素として扱う。これには対応する</～>が必要となる)
+　　第四引数 スタイル設定名(デフォルト値はNone)
+　　第五引数 表示名(""で囲む。""なしNoneは表示名を表示しない)
+　　第六引数 [表示内容に含めたhtml要素のid,適応したいstyle要素]のリスト
+　parallel:　//未実装
+　　第一引数 do_nextフラグ[0/1]
+　　第二引数 行番号/funcName(args)
+　　第三引数 行番号/funcName(args)
+　clearvar：
+　　第一引数 do_nextフラグ
+　　第二引数 変数パス
+　　第三引数 設定:
+　　　1:再帰的に下層をundefinedに置き換え(辞書のキーは残す)
+　　　2:変数自体の削除(その下層の変数も)->配列は消した分詰められる
+　　　3:最外層のみundefinedに置き換え
+　end://未完成
+　　引数なし
+　　return [1, null]

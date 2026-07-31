@@ -1,0 +1,31 @@
+setvar 1 program["expr#9"]["left"] 100
+setvar 1 program["expr#9"]["right"] 35
+setvar 1 program["expr#9"]["result"] program["expr#9"]["left"]
+sc_calc 1 program["expr#9"]["result"] *= program["expr#9"]["right"]
+setvar 1 program["expr#8"]["left"] program["expr#9"]["result"]
+setvar 1 program["expr#12"]["left"] 1
+setvar 1 program["expr#12"]["right"] b
+setvar 1 program["expr#12"]["result"] program["expr#12"]["left"]
+sc_calc 1 program["expr#12"]["result"] += program["expr#12"]["right"]
+setvar 1 program["expr#8"]["right"] program["expr#12"]["result"]
+setvar 1 program["expr#8"]["result"] program["expr#8"]["left"]
+sc_calc 1 program["expr#8"]["result"] /= program["expr#8"]["right"]
+setvar 0 i program["expr#8"]["result"]
+clearvar 1 program["expr#8"] 2
+
+setvar 1 program["expr#2"]["left"] 100
+setvar 1 program["expr#2"]["right"] 35
+setvar 1 program["expr#2"]["result"] program["expr#2"]["left"]
+sc_calc 1 program["expr#2"]["result"] *= program["expr#2"]["right"]
+setvar 1 program["expr#5"]["left"] 1
+setvar 1 program["expr#5"]["right"] b
+setvar 1 program["expr#5"]["result"] program["expr#5"]["left"]
+sc_calc 1 program["expr#5"]["result"] += program["expr#5"]["right"]
+setvar 1 program["expr#1"]["left"] program["expr#2"]["result"]
+setvar 1 program["expr#1"]["right"] program["expr#5"]["result"]
+setvar 1 program["expr#1"]["result"] program["expr#1"]["left"]
+sc_calc 1 program["expr#1"]["result"] /= program["expr#1"]["right"]
+setvar 1 i program["expr#1"]["result"]
+clearvar 0 program["expr#2"] 2
+clearvar 0 program["expr#5"] 2
+clearvar 0 program["expr#1"] 2

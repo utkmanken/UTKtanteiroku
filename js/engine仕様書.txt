@@ -1,0 +1,32 @@
+engine.js:
+1.initEngine実行 > localStorageやjsの許可の確認 > first_display_changeへ
+2.first_display_change
+　データの読み取り(ASSETSへ)
+　maintitle.htmlに変更し、css追加
+　進行度を確認し、適切なボタンを表示する
+　隠れているボタン含めイベントリスナーを設定する
+　ボタンにイベントリスナーと動作を設定
+　current_display = "title"に設定
+
+最初からボタンのとき:
+　シナリオの進行状況に応じてゲームが最初からスタートすることのアラート
+　シナリオデータのリセット
+　display_change_toStory実行(last_sc_line=-1の状態)
+つづきからボタンのとき:
+　last_sc_lineをlast_saved_scenarioに同期(ずれていた時)
+　display_change_toStoryContinue(last_saved_scenario)実行:
+　　current_display = "continue"
+　　display_change_toStoryで場面切り替え
+　　do_inaninstant = trueで保存された番号までdo_scenario
+
+display_chage_toStory():ストーリーモードへの画面遷移
+　maindisplay.htmlに内容を差し替え
+　メニューボタンで暫定的にタイトル画面へ
+　id="nextbutton"を押すとシナリオが進む: do_scenario
+
+do_scenario:
+　繰り返す:
+　　実行する行のデータをSCENARIOからとってくる
+　　実行する
+　　戻り値からsetvarやjump, do_nextなどの処理をする(continue)
+　　最後に実行した行番号(0-based)をreturnしてループを抜ける
