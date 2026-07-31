@@ -1,0 +1,188 @@
+
+
+/*メインプレイ画面*/
+
+    #characanvas{
+        position: absolute;
+        bottom: 35.15625%;
+        width: 90%;
+        height: 50%;
+    }
+
+    #kari{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    #textframe {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        flex-direction: column; 
+        bottom: 0;
+        width: 100%;
+        height: 35.15625%;
+        z-index: 5;
+        background-image: var(--textframe-url);/*url(../material/frame/text_frame.svg)*/
+    }
+
+    #textbox{
+        position: absolute;
+        margin: 14%;
+        width: 86%;
+        height: 65%;
+        z-index: 5;
+        word-break: normal;
+    }
+
+    #namebox{
+        position: absolute;
+        width: 86%;
+        height: 20%;
+        z-index: 6;
+        top: 5%;
+
+        display: flex;
+        align-items: center;
+        }
+
+    #name_frame{
+        position: absolute;
+        width: 50%;
+        left: -2%;
+    }
+
+    #charaname{
+        text-align: center;
+        font-family: Koguchi;
+        transform: scaleY(1.75) skewX(-11deg);
+        font-size: 23px;
+
+        color: white;
+        font-feature-settings: "palt";
+        letter-spacing : 1px;
+        
+        -webkit-text-stroke-width: 1.4px;
+        -webkit-text-stroke-color: #202040;
+        paint-order: stroke;
+        }
+
+
+    #mainmenublock{
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        aspect-ratio: 144 / 31;
+        height: 10%;
+        background-image: var(--mainmenublock-url);/*url(../material/frame/menu_frame.svg)*/
+    }
+
+    #menumemoblock{
+        position: absolute;
+        top: 7%;
+        right: 4%;
+        height: 42%;
+        background-color: lightskyblue;
+        display: flex;
+        justify-content: flex;
+        gap: 3%;
+        flex-direction: row-reverse;
+        align-content: flex-start;
+    }
+
+    #skipautoblock{
+        position: absolute;
+        top: 66%;
+        right: 4%;
+        height: 19%;
+        background-color: rgb(0, 173, 241);
+        display: flex;
+        justify-content: flex;
+        gap: 3%;
+        flex-direction: row-reverse;
+        align-content: flex-start;
+    }
+
+
+    #mainmenubutton{
+        top: 0;
+        right: 0;
+        height: 100%;
+        aspect-ratio: 1;
+        float: right;
+        
+    }
+
+    #backlogbutton{
+        height: 100%;
+        aspect-ratio: 5/2;
+        float: right;
+
+    }
+
+    .playbutton{
+        top: 100%;
+        right: 4%;
+        height: 100%;
+        aspect-ratio: 7 / 2 ;
+    }
+
+    #nextbutton{
+        position:absolute;
+        top: 75%;
+        right: 10%;
+        z-index: 7;
+    }
+
+    #textcontent{
+        color: white;
+        font-size: 20px;
+        font-feature-settings: "palt";
+
+        -webkit-text-stroke-width: 2.7px;
+        -webkit-text-stroke-color: #202040;
+        paint-order: stroke;
+		margin : 3% 0 0 0;/*変更済み*/
+		white-space: pre-wrap;/*変更済み*/
+        overflow-wrap: break-word;/*変更済み*/
+    }
+	#textcontent > pre{
+		margin: 5px 0;
+	}/*変更済み*/
+
+
+
+    #gamebg{
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+        background-size: cover;
+        background-position: center;
+        background-image: var(--gamebg-url);/*url("../material/back_image/library.jpg")*/
+    }
+
+/*メニュー画面*/
+
+    #menublock{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        height: 50%;
+        background-color: gray;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+
+    .menubotton{
+        width: 100%;
+        height: 20%;
+    }
