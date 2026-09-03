@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="../../css/maindisplay.css">
+        <title>utktanteiroku_sample</title>
+    </head>
+    <body>
+        <div class="base" id="maindisplaybase">
+            <div id="sc_frontmost_div" class="top"></div><!--シナリオ中で使う、一定時間後に自動で消える用途向け-->
+            <div id="contentdiv" class="top"></div><!--タイトル画面の上に表示する用のdiv-->
+            <div id="alertdiv" class="top"></div><!--確認画面用のdiv-->
+            <div id="gamebg"></div><!--ゲーム用の背景用-->
+            <div id="back_item_canvas"></div>
+            <div id="characanvas">
+                <!--<img src="../../material/chara_image/A_Kabura_webp/chara_A01.webp" id="kari">-->
+            </div><!--キャラクター表示領域-->
+            <div id="front_item_canvas"></div>
+            <div id="between_frame_and_menu" class="top"></div><!--シナリオ中でメニューは隠さず、テキストは隠すもの-->
+            <div id="mainmenublock"><!--メインメニューボタン用-->
+                <div id="menumemoblock">
+
+                    <button id="mainmenubutton" class="systembutton"></button>
+
+                    <button id="auto_mode_button" class="systembutton"></button >
+                        <!--オートモードのボタン-->
+
+                    <button id="backlogbutton" class="systembutton">
+                        探偵メモ
+                    </button >
+                </div>
+            </div>
+ 
+            <div id="textframe" class="maintext"><!--テキストの後ろに配置されるゲーム上のテキストの見かけの枠-->
+                <div id="namebox" class="maintext">
+                    <img src="" id="name_frame">
+                    <span id="charaname">
+                        芒 カブラ
+                    </span>
+                </div><!--実際にキャラ名を表示させるdiv-->
+                <div id="textbox" class="maintext">
+                    <p id="textcontent">
+                        バッハの旋律を夜に聞いたせいですこんな心、バッハの旋律を夜に聞いたせいですこんな心、
+                        class="top"のdisplayがnoneになっていて、素の状態では表示されませんので表示させる場合にはdisplayを変更してください
+                    </p>
+                </div><!--実際にテキストを表示させるdiv-->
+                <button id="nextbutton">
+                    
+                </button>
+            </div>
+
+            <div id="place_box"> <!--display: none-->
+                <div id="place_box_content">
+                    ここに場所をいれたい
+                </div>
+            </div>
+
+        </div>
+        
+    </body>
+</html>
