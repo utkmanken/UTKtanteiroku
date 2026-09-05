@@ -35,7 +35,7 @@
     },
 
     "automode_time": {
-        "fast": 1,
+        "fast": 1000,
         "normal": 2000,
         "slow": 4000
     },
