@@ -1,0 +1,15 @@
+HTML/maindisplay/maindisplay.html|202608291833
+HTML/maindisplay/menu.html|202608092036
+HTML/maindisplay/camera.html|202608202344
+HTML/title/maintitle.html|202608051739
+HTML/title/record.html|202608161339
+HTML/title/solvingmode.html|202608011656
+HTML/title/record_summary.html|202608161338
+HTML/maindisplay/backlog.html|202608161339
+HTML/title/logo_anim.html|202608032158
+HTML/general/settings.html|202608130101
+HTML/maindisplay/route.html|202608212045
+HTML/maindisplay/nazo.html|202608291031
+HTML/maindisplay/nazo_camera.html|202608291031
+HTML/maindisplay/popInChara.html|202608260404
+HTML/maindisplay/rends.html|202608260208

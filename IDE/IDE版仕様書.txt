@@ -1,0 +1,319 @@
+――――――――――――――――――――――――――――――
+A. 利用者向け（IDE での書き方 → 出力される sc）
+――――――――――――――――――――――――――――――
+
+※ 表記ルール
+do_next / stop は行末オプション。do_next は次命令へ進む、stop は停止。
+式は内部で一時変数 program["expr#N"] に展開されることが多い。
+ラベルは内部で __L<number>__: 形式で生成され、最終出力では backpatch により行番号に置換される。
+
+代入（set）
+書き方:
+set <変数名> = <式> [do_next|stop]
+例: set x = 10 do_next
+生成される sc（代表例）:
+setvar 1 x 10
+留意点:
+式が複雑な場合は一時変数に展開される（setvar / sc_calc の連続）。
+do_next/stop により clearvar のフラグが変わる。
+
+計算（calc）
+書き方:
+calc <変数名> <op> <式> [do_next|stop]
+op は + - * / % ^
+例:
+calc x += 5 do_next
+calc x = q + 3 stop
+生成される sc（代表例）:
+sc_calc 1 x + 5
+留意点:
+op 表記は単純な演算子（+ - * / % ^）で出力される。
+式が一時変数なら sc_calc 1 x + program["expr#N"] のようになる。
+
+式（四則・べき乗・単項）
+書き方:
+任意の式（括弧可）
+例:
+set y = 2^3*4 do_next
+生成される sc（代表例）:
+setvar 1 program["expr#1"] 2
+sc_calc 1 program["expr#1"] ^ 3
+setvar 1 program["expr#2"] 4
+sc_calc 1 program["expr#1"] * program["expr#2"]
+setvar 1 y program["expr#1"]
+留意点:
+^ は右結合（234 → 2(3(4)))。優先度は BP 設定に依存。
+
+単項 - の優先度は言語仕様で決める（現在の実装では ^ より低い/高い等は設定可能）。
+
+配列アクセス / オブジェクトアクセス
+書き方:
+a["key"] または a[index]
+生成される sc（代表例）:
+setvar 1 program["expr#N"] a["key"]
+留意点:
+アクセス結果は一時に格納して寿命（clearvar）を管理する。
+
+論理否定（!）
+書き方:
+!<式>
+生成される中間（ラベルあり）例:
+setvar 1 program["expr#1"] <val>
+sc_if program["expr#1"]==0 L1 L2
+L1:
+setvar 1 program["expr#2"] 1
+jumpto L3
+L2:
+setvar 1 program["expr#2"] 0
+L3:
+setvar 1 x program["expr#2"]
+clearvar ...
+最終出力:
+backpatch により sc_if/jumpto のラベルは行番号に置換される。
+留意点:
+! はラベルを使うため backpatch が必須。
+
+ラベル / goto
+書き方:
+label L
+goto L
+生成される sc:
+L1:
+jumpto <line>  （backpatch 後は行番号）
+留意点:
+ラベル名は内部で一意化される。ユーザー名は任意だが内部名にマップされる。
+
+say / console / その他ブロック
+書き方:
+say:
+<mode>
+"""..."""  （複数行文字列）
+charName:displayName
+option
+console <expr> [do_next|stop]
+生成される sc:
+setvar / sc_if / jumpto 等の組合せ（機能により異なる）
+留意点:
+
+複数行文字列はインデントを除去して結合される（readTripleString の仕様に従う）。
+
+インデントは 4 スペース単位。
+
+――――――――――――――――――――――――――――――
+B. 開発者向け（IDE.js 内の主要関数と責務）
+――――――――――――――――――――――――――――――
+
+この節は「この関数を呼べば何が得られるか」を中心にまとめています。関数名は IDE.js 内の実装名に合わせています。
+
+tokenize(source)
+
+役割: ソース文字列をトークン列に変換する（インデント処理、複数行文字列、コメント除去を含む）。
+
+入力: ソース文字列
+
+出力: トークン配列（各トークンは {type, value?}）
+
+使い方: parse(source) は内部で tokenize を呼ぶ。単体で呼べばトークン列を確認できる。
+
+留意: splitIntoParts の正規表現、processIndent の 4 スペースルール、readTripleString の baseIndent 処理を確認。
+
+splitIntoParts(line)
+
+役割: 1 行をトークン候補の断片に分割する（正規表現で演算子・文字列・数値・識別子を切り出す）。
+
+変更箇所: 演算子集合（例: ^, !）をここに追加する必要がある。
+
+出力: 部分文字列配列（空白は除去される）。
+
+classifyToken(part)
+
+役割: 部分文字列をトークンオブジェクトに分類する（IDENT, NUMBER, STRING, OPERATOR, LPAREN 等）。
+
+使い方: tokenize 内で呼ばれる。OPERATOR の正規表現をここで管理。
+
+留意: 日本語識別子範囲（JP_RANGE）や複数行文字列の扱いに注意。
+
+parse(source) / parseProgram()
+
+役割: トークン列から AST（Program）を生成する。Pratt パーサ（nud/led）を採用。
+
+出力: AST（Program ノード）
+
+使い方: ユーザー入力を AST に変換する最短経路。parse は tokenize を呼ぶ。
+
+parseExpression(bp = 0), nud(token), led(left, token)
+
+役割: 式のパース。BP（binding power）表に従って優先順位を処理する。
+
+重要: べき乗 ^ を右結合にするため、led 内で右側を parseExpression(bp - 1) で呼ぶ実装にしている。
+
+変更点: 優先度（BP）を調整すると言語の結合性が変わる。
+
+generateProgram(node)
+
+役割: AST（Program）を受け取り、各ステートメントを generate で文字列化し、行単位で平坦化して backpatch を実行、最終 sc テキストを返す。
+
+出力: 最終 sc テキスト（改行で結合された文字列）
+
+使い方: コンパイルの最上位 API。labelCounter / exprCounter をここでリセットするのが推奨。
+
+デバッグ: ループ内で generate(stmt) の出力をログすると中間コードを確認できる。
+
+generate(node) と各 generateX（generateSet, generateCalc, generateConsole, ...）
+
+役割: AST の各ノードを中間 sc 命令列（文字列）に変換する。generate はノード種別で分岐して各 generateX を呼ぶ。
+
+使い方: generateProgram が呼ぶ。個別ノードの単体テストに便利。
+
+generateExpression(rootExpr)
+
+役割: 式ノードを { code: [...lines], result: <ref>, temps: [...] } で返す。result は式の参照（リテラルや program["expr#N"]）。
+
+出力: 中間コード（ラベル含む可能性あり）、result、temps（生成した一時名の配列）
+
+使い方: generateSet / generateCalc 内で呼び出して式を展開する。
+
+留意: UnaryOp(!) はラベルを含む中間コードを返すため、generateProgram 側で backpatch が必須。
+
+newTemp(), newLabel()
+
+役割: 一意の一時変数名（expr#N）とラベル名（L<N>）を生成する。
+
+使い方: generateExpression 内で一時を作るとき、ラベルが必要なときに呼ぶ。
+
+留意: generateProgram の先頭でカウンタをリセットすると複数回コンパイルで衝突しない。
+
+backpatch(lines)
+
+役割: ラベル行を検出して行番号を割り当て、sc_if と jumpto の引数だけを安全に置換する。ラベル行は命令にカウントしない。
+
+入力: 平坦化された行配列（ラベル行を含む）
+
+出力: ラベル置換済みの行配列（ラベル行は除去）
+
+留意: 未知ラベルは例外を投げる。ラベルの正規表現は newLabel の出力形式と一致させる。
+
+opToCalc(op)
+
+役割: AST の演算子を sc の演算子表記に変換する（現在は "+ - * / % ^" を返す）。
+
+使い方: generateExpression の BinaryOp、generateCalc などで呼ぶ。
+
+変更時: sc_calc の表記変更があればここを更新する。
+
+――――――――――――――――――――――――――――――
+C. よく使う呼び出し（開発時）
+――――――――――――――――――――――――――――――
+
+ソース → トークン列:
+tokenize(source)
+
+ソース → AST:
+parse(source)   // 内部で tokenize を呼ぶ
+
+AST → 最終 sc テキスト:
+generateProgram(ast)
+
+単独式ノード → 中間コード:
+generateExpression(exprNode)  // {code, result, temps}
+
+ラベル解決を単体で試す:
+backpatch(allLines)  // allLines は generate(stmt) を平坦化した配列
+
+一時名 / ラベルを手動で生成:
+newTemp(), newLabel()
+
+――――――――――――――――――――――――――――――
+D. デバッグ / テストチェックリスト（短く）
+――――――――――――――――――――――――――――――
+
+トークン化:
+
+tokenize("set x = !0 do_next") に OPERATOR '!' が含まれるか。
+
+パース:
+
+parse("set x = !0 do_next") の AST が UnaryOp を含むか。
+
+式生成:
+
+generateExpression(UnaryOp) が sc_if とラベルを含む中間コードを返すか。
+
+平坦化:
+
+generateProgram が各 generate(stmt) の出力を allLines に正しく追加しているか。
+
+バックパッチ:
+
+backpatch が labelToLine を作成し、sc_if/jumpto の引数を数値に置換しているか。
+
+do_next/stop:
+
+clearvar の第1引数が 1/0 になっているか。
+
+優先度:
+
+parseExpression で ^ が右結合になっているか（AST 構造で確認）。
+
+一貫性:
+
+newLabel の出力形式と backpatch の正規表現が一致しているか。
+
+――――――――――――――――――――――――――――――
+E. 運用メモ（留意点）
+――――――――――――――――――――――――――――――
+
+ラベル形式は一貫させる（推奨: __L<number>__）。backpatch の正規表現はこれに合わせる。
+
+splitIntoParts の正規表現を変更したら classifyToken の判定も合わせる。
+
+BP（binding power）を変えると式の結合性が変わる。仕様を明文化しておくこと。
+
+定数畳み込み（コンパイル時評価）は後から追加可能で、生成コードを大幅に簡潔化できる。
+
+デバッグ用 console.log は generateProgram の主要ステップ（allLines, labelToLine, finalLines）に限定するとノイズが少ない。
+
+ドキュメントはリポジトリ内に txt で保存し、主要変更時に更新すること。
+
+――――――――――――――――――――――――――――――
+F. すぐ使えるテンプレ（よく使う例）
+――――――――――――――――――――――――――――――
+
+単純代入
+入力:
+set x = 5 do_next
+出力:
+setvar 1 x 5
+
+複合式
+入力:
+set i = 10*(12+a["b"]) do_next
+出力（代表）:
+setvar 1 program["expr#1"] a["b"]
+setvar 1 program["expr#2"] 12
+sc_calc 1 program["expr#2"] + program["expr#1"]
+setvar 1 program["expr#3"] 10
+sc_calc 1 program["expr#3"] * program["expr#2"]
+setvar 1 i program["expr#3"]
+clearvar ...
+
+否定
+入力:
+set x = !0 do_next
+中間（ラベルあり）:
+setvar 1 program["expr#1"] 0
+sc_if program["expr#1"]==0 L1 L2
+L1:
+setvar 1 program["expr#2"] 1
+jumpto L3
+L2:
+setvar 1 program["expr#2"] 0
+L3:
+setvar 1 x program["expr#2"]
+clearvar ...
+最終:
+backpatch により sc_if/jumpto の引数は行番号に置換される。
+
+――――――――――――――――――――――――――――――
+終わりに（保存と運用）
+――――――――――――――――――――――――――――――

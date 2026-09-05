@@ -1,0 +1,1 @@
+disp_text 0 dialogue あいうえおかきくけこさしす<ruby>せそたち<rp>(</rp><rt>sesotachi</rt><rp>)</rp></ruby>くてとなにぬねの None None {}

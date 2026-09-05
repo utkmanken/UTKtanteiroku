@@ -1,0 +1,107 @@
+say:
+    nomal
+    """
+    aiueo
+    """
+    admin:管理者
+    None
+loop i = 0 -> 9:
+    console i do_next
+    if i % 2==0:
+        console "${i}は偶数です" do_next
+    else:
+        console "${i}は奇数です" do_next
+↓
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "say",
+      "mode": "nomal",
+      "text": "aiueo",
+      "charName": "admin",
+      "displayName": "管理者",
+      "option": "None"
+    },
+    {
+      "type": "loop",
+      "var": "i",
+      "start": {
+        "type": "NumberLiteral",
+        "value": 0
+      },
+      "end": {
+        "type": "NumberLiteral",
+        "value": 9
+      },
+      "body": [
+        {
+          "type": "Console",
+          "value": {
+            "type": "VarRef",
+            "name": "i"
+          },
+          "doNext": true
+        },
+        {
+          "type": "if",
+          "condition": {
+            "type": "BinaryOp",
+            "op": "==",
+            "left": {
+              "type": "BinaryOp",
+              "op": "%",
+              "left": {
+                "type": "VarRef",
+                "name": "i"
+              },
+              "right": {
+                "type": "NumberLiteral",
+                "value": 2
+              }
+            },
+            "right": {
+              "type": "NumberLiteral",
+              "value": 0
+            }
+          },
+          "trueBody": [
+            {
+              "type": "Console",
+              "value": {
+                "type": "StringLiteral",
+                "value": "${i}は偶数です"
+              },
+              "doNext": true
+            }
+          ],
+          "falseBody": [
+            {
+              "type": "Console",
+              "value": {
+                "type": "StringLiteral",
+                "value": "${i}は奇数です"
+              },
+              "doNext": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+↓
+disp_text 1 dialogue aiueo admin "管理者" []
+setvar 1 i 0
+disp_text 1 console ${i} None None []
+setvar 1 if#1 i
+sc_calc if#1 %= 2
+sc_if if#1==0 7 9
+disp_text 1 console ${i}は偶数です None None []
+jumpto 11
+disp_text 1 console ${i}は奇数です None None []
+jumpto 11
+sc_calc i += 1
+sc_if i==9 13 3
+end
+

@@ -1,0 +1,54 @@
+<textarea id="editor" style="width:100%;height:200px;"></textarea>
+<button onclick="runTest()">parse</button>
+<p>↓</p>
+<textarea id="sc_code" style="width:100%;height:200px;"></textarea>
+<div>
+    <textarea id="exprInput" rows="3" cols="40">a * 10 > b + 10</textarea>
+    <br>
+    <button id="testExprBtn">式をパース</button>
+</div>
+
+<pre id="exprResult"></pre>
+
+
+<script src="IDE.js"></script>
+<script>
+/*
+function runTest() {
+    const code = document.getElementById("editor").value;
+    //console.log(parse(code));
+	const ast = parse(code);
+	console.log(JSON.stringify(ast, null, 2));
+}
+*/
+function runTest() {
+    const code = document.getElementById("editor").value;
+    const ast = parse(code);
+	console.log("Aパーサーの結果:\n"+JSON.stringify(ast, null, 2));
+    const sc = generate(ast);
+    console.log(JSON.stringify(sc, null, 2));
+	document.getElementById("sc_code").value = sc;
+}
+
+function runTestExpr() {
+    const code = document.getElementById("editor").value;
+    //console.log(parse(code));
+	const ast = testExpr(code);
+	console.log(JSON.stringify(ast, null, 2));
+}
+</script>
+
+<script>
+document.getElementById("testExprBtn").addEventListener("click", () => {
+    const input = document.getElementById("exprInput").value;
+    try {
+        const ast = testExpression(input);
+		console.log(JSON.stringify(ast, null, 2));
+        document.getElementById("exprResult").textContent =
+            JSON.stringify(ast, null, 2);
+    } catch (e) {
+        document.getElementById("exprResult").textContent = "Error: " + e.message;
+		console.log(e);
+    }
+});
+</script>

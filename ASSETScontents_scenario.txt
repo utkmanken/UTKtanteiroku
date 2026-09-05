@@ -1,0 +1,13 @@
+scenario/before_begin.sc|202609040416
+scenario/1.sc|202609040416
+scenario/2.sc|202609040416
+scenario/3a.sc|202609040416
+scenario/3b1.sc|202609040416
+scenario/3b2.sc|202609040416
+scenario/3c1.sc|202609040416
+scenario/3c2.sc|202609040416
+scenario/makuma.sc|202609040416
+scenario/4.sc|202609040416
+scenario/5.sc|202609040416
+scenario/6.sc|202609040416
+scenario/ending.sc|202609040416

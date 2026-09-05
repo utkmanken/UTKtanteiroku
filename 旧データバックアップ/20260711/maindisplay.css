@@ -1,0 +1,138 @@
+
+
+/*メインプレイ画面*/
+
+    #characanvas{
+        position: absolute;
+        bottom: 30%;
+        width: 100%;
+        height: 50%;
+        background-color:rgba(178, 171, 163, 0.5);
+    }
+
+    #textframe {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        flex-direction: column; 
+        bottom: 0;
+        width: 100%;
+        height: 30%;
+        background-color: gray;
+        z-index: 5;
+    }
+
+    #textbox{
+        position: absolute;
+        margin: 14%;
+        width: 86%;
+        height: 65%;
+        background-color: rgb(84, 84, 84);
+        z-index: 5;
+    }
+
+    #namebox{
+        position: absolute;
+        line-height:20%;
+        width: 86%;
+        height: 20%;
+        background-color: rgb(170, 157, 157);
+        z-index: 6;
+        margin: 3%;
+    }
+
+    #charaname{
+        text-align: center;
+    }
+
+
+    #mainmenublock{
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        width: 75%;
+        height: 16%;
+        background-color: gray;
+    }
+
+    #menumemoblock{
+        position: absolute;
+        top: 7%;
+        right: 4%;
+        height: 50%;
+        background-color: lightskyblue;
+        display: flex;
+        justify-content: flex;
+        gap: 3%;
+        flex-direction: row-reverse;
+        align-content: flex-start;
+    }
+
+    #skipautoblock{
+        position: absolute;
+        top: 66%;
+        right: 4%;
+        height: 25%;
+        background-color: rgb(0, 173, 241);
+        display: flex;
+        justify-content: flex;
+        gap: 3%;
+        flex-direction: row-reverse;
+        align-content: flex-start;
+    }
+
+
+    #mainmenubutton{
+        top: 0;
+        right: 0;
+        height: 100%;
+        aspect-ratio: 1;
+        float: right;
+        
+    }
+
+    #backlogbutton{
+        height: 100%;
+        aspect-ratio: 5/2;
+        float: right;
+
+    }
+
+    .playbutton{
+        top: 100%;
+        right: 4%;
+        height: 100%;
+        aspect-ratio: 7 / 2 ;
+    }
+
+    #nextbutton{
+        position:absolute;
+        top: 75%;
+        right: 10%;
+        z-index: 7;
+    }
+
+
+/*メニュー画面*/
+
+    #menublock{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        height: 50%;
+        background-color: gray;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+
+    .menubotton{
+        width: 100%;
+        height: 20%;
+    }
